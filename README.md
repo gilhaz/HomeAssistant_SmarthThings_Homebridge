@@ -68,7 +68,7 @@ sudo apt-get install -y nodejs
 ```
 
 ### install smartthings-mqtt-bridge (link smartthings devices to hass)
-### instructions on installing the smartapp on smartthings (only the SMARTTHINGS DEVICE/APP parts):
+#### instructions on installing the smartapp on smartthings (only the SMARTTHINGS DEVICE/APP parts):
 ```sh
 https://home-assistant.io/blog/2016/02/09/Smarter-Smart-Things-with-MQTT-and-Home-Assistant/
 ```
@@ -190,7 +190,7 @@ sudo nano harmony_api/config/config.json
   }
 }
 ```
-### Chack harmony api is discovering the hub and publish to mqtt (may take a minute to show)
+> Chack harmony api is discovering the hub and publish to mqtt (may take a minute to show)
 ### open 2 terminal windows
 ### first:
 ```sh
