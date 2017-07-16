@@ -41,12 +41,13 @@ Enter Broker > "
 read -r mqtt_broker
 
 echo
-echo  "~~~~~~~~~~~~~~~~~~~< Do You Want it all >~~~~~~~~~~~~~~~~~~~~~
+echo -n "~~~~~~~~~~~~~~~~~~~< Do You Want it all >~~~~~~~~~~~~~~~~~~~~~
 	If you answer 'y', this will also install:
 	* Harmony API - for better responce time to Harmony devices and activities
-	* Samba - file sharing"
+	* Samba - file sharing
 
-read -r install_all "Install all? > " -n 1 -r
+Install all? > "
+read -r install_all
 echo
 if $install_all="y"
 then
