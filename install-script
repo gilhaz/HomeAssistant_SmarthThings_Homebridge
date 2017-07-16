@@ -19,36 +19,53 @@ echo  "Please take a moment to setup your first MQTT user"
 echo -n "~~~~~~~~~~~~~~~~~~~~~~< MQTT Username >~~~~~~~~~~~~~~~~~~~~~~~
 
 	~ Choose a UserName for Mosquitto MQTT.
+	~ You have 10 sec or a default username 'pi' will be use
 
 Enter Username > "
-read -r mqtt_username
+read -t 10 -r mqtt_username
+if [ ! "$mqtt_username" ]; then
+  mqtt_username=pi
+fi
 
 echo
 echo -n "~~~~~~~~~~~~~~~~~~~~~~< MQTT Password >~~~~~~~~~~~~~~~~~~~~~~~
 
 	~ Choose a password for Mosquitto MQTT.
+	~ You have 10 sec or a default password 'raspberry' will be use
 
 Enter Password > "
-read -s mqtt_password
+read -t 10 -s mqtt_password
+if [ ! "$mqtt_password" ]; then
+  mqtt_password=raspberry
+fi
+
 
 echo
 echo -n "~~~~~~~~~~~~~~~~~~~~~< MQTT Broker IP >~~~~~~~~~~~~~~~~~~~~~~~
 
 	~ Enter the MQTT host IP.
 	~ Examples: '192.168.x.x' or 'hassbian.local' or localhost
+	~ You have 10 sec or a default address 'localhost' will be use
 
 Enter Broker > "
-read -r mqtt_broker
+read -t 10 -r mqtt_broker
+if [ ! "$mqtt_broker" ]; then
+  mqtt_broker=localhost
+fi
 
 echo
 echo -n "~~~~~~~~~~~~~~~~~~~< Do You Want it all >~~~~~~~~~~~~~~~~~~~~~
-	If you answer 'y', this will also install:
-	 Harmony API - better responce time to Harmony devices and activities
-	 Samba - file sharing
+	~ If you answer 'y', this will also install:
+	~ Harmony API - better responce time to Harmony
+	~ Samba - file sharing
+	~ You have 10 sec or they will be installed
+	~ Press 'n' to skip 
 	
 Install all? > "
-read -r install_all
-echo
+read -t 10 -r install_all
+if [ ! "$install_all" ]; then
+  install_all=y
+fi
 if [[ "$install_all" == "y" ]]
 then
   echo
@@ -68,17 +85,30 @@ echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Install Avahi (HomeKit Support)"
 sudo apt-get install -y libavahi-compat-libdnssd-dev
 
-echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Install 'hassbian-config' Scripts"
 if $install_all="y"
 then
-echo "Insralling Samba.."
+echo
+echo "~~~~~~~~~~~~~~~~~~~~~< Insralling Samba.."
 sudo hassbian-config install samba
 fi
-echo "Insralling Mosquitto.."
-echo $mqtt_username
-$mqtt_password
- | sudo hassbian-config install mosquitto
+echo
+echo "~~~~~~~~~~~~~~~~~~~~~< Insralling Mosquitto.."
+echo "$mqtt_username $mqtt_password" | sudo hassbian-config install mosquitto
+
+echo "Initializing password file"
+sudo rm /etc/mosquitto/pwfile
+cd /etc/mosquitto
+touch pwfile
+chown mosquitto:mosquitto pwfile
+chmod 0600 pwfile
+
+echo "Creating password entry for user - $mqtt_username"
+mosquitto_passwd -b pwfile "$mqtt_username" "$mqtt_password"
+
+echo "Restarting Mosquitto service"
+systemctl restart mosquitto.service
+
+
 cat >> /home/homeassistant/.homeassistant/configuration.yaml <<EOF
 
 ## MQTT server (pull devices from SmartThing's 'MQTT Bridge' smartapp)
