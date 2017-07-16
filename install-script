@@ -49,7 +49,7 @@ echo -n "~~~~~~~~~~~~~~~~~~~< Do You Want it all >~~~~~~~~~~~~~~~~~~~~~
 Install all? > "
 read -r install_all
 echo
-if $install_all="y"
+if [[ "$install_all" == "y" ]]
 then
   echo
   echo "Grate!"
