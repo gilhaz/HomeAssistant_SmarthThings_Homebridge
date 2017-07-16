@@ -43,9 +43,9 @@ read -r mqtt_broker
 echo
 echo -n "~~~~~~~~~~~~~~~~~~~< Do You Want it all >~~~~~~~~~~~~~~~~~~~~~
 	If you answer 'y', this will also install:
-	* Harmony API - for better responce time to Harmony devices and activities
-	* Samba - file sharing
-
+	 Harmony API - better responce time to Harmony devices and activities
+	 Samba - file sharing
+	
 Install all? > "
 read -r install_all
 echo
