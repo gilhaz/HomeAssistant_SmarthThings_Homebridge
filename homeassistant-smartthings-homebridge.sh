@@ -6,7 +6,6 @@ echo "~~ Home Assistant - SmartThings HomeBridge Installer Script ~~"
 echo "~~                                                          ~~"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "~~~~~~~~~~~~~~~~~~~~~< MQTT Username >~~~~~~~~~~~~~~~~~~~~~
 
 if [ "$(id -u)" != "0" ]; then
    echo "This script must be run with sudo."
