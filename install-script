@@ -41,6 +41,25 @@ Enter Broker > "
 read -r mqtt_broker
 
 echo
+echo -n "~~~~~~~~~~~~~~~~~~~< Do You Want it all >~~~~~~~~~~~~~~~~~~~~~"
+echo "If you answer 'y', this will also install:"
+echo "Harmony API - for better responce time to Harmony devices and activities"
+echo "Samba - file sharing"
+
+read -p "Install all? " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+  echo
+  echo "Grate!"
+    install_all="yes"
+  else
+    echo
+    echo "Harmony API and Samba will not be installed"
+    install_all="no"
+fi
+
+echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Running apt-get preparation.."
 echo "(this my take a while)"
 sudo apt-get update
@@ -52,8 +71,11 @@ sudo apt-get install -y libavahi-compat-libdnssd-dev
 
 echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Install 'hassbian-config' Scripts"
+if $install_all="yes"
+then
 echo "Insralling Samba.."
 sudo hassbian-config install samba
+fi
 echo "Insralling Mosquitto.."
 sudo hassbian-config install mosquitto
 expect "Username: "
@@ -151,12 +173,13 @@ cat >> /home/pi/.homebridge/config.json <<EOF
 }
 EOF
 
+if $install_all="yes"
+then
 echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Install Harmony API"
 echo "Better server for speed up harmony devices responce"
 sudo npm install forever -g
 git clone https://github.com/maddox/harmony-api.git harmony_api
-sudo harmony_api/script/bootstrap
 cat >> /home/pi/harmony_api/config/config.json <<EOF
 {
   "mqtt_host": "mqtt://$mqtt_broker",
@@ -168,6 +191,8 @@ cat >> /home/pi/harmony_api/config/config.json <<EOF
   }
 }
 EOF
+sudo harmony_api/script/bootstrap
+fi
 
 echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Install pm2"
