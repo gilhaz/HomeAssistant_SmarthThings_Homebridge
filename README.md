@@ -26,6 +26,7 @@ sudo apt-get install -y libavahi-compat-libdnssd-dev
 sudo hassbian-config install samba
 sudo hassbian-config install mosquitto
 ```
+##### Choose username and password in the mosquitto install process and wright them down! They will be use for configure mqtt.
 > To connect to Samba file sharing from Mac:
 > When on the deasktop go to > Go > Connect to Server... or press [cmd] [K]
 > Insert: smb://hassbian.local/homeassistant 
