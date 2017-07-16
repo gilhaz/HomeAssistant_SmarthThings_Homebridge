@@ -68,8 +68,8 @@ sudo apt-get install -y nodejs
 ```
 
 ### install smartthings-mqtt-bridge (link smartthings devices to hass)
-#### instructions on installing the smartapp on smartthings (only the SMARTTHINGS DEVICE/APP parts):
 Instroctions here: [Smarter-Smart-Things-with-MQTT-and-Home-Assistant](https://home-assistant.io/blog/2016/02/09/Smarter-Smart-Things-with-MQTT-and-Home-Assistant/)
+> only the 'SMARTTHINGS DEVICE' and 'SMARTTHINGS APP' parts.
 ### install smartthings to mqtt bridge (pull devices from SmartThing's 'MQTT Bridge' smartapp)
 ```sh
 sudo npm install -g smartthings-mqtt-bridge
