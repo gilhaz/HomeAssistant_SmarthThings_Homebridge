@@ -55,7 +55,11 @@ echo "~~~~~~~~~~~~~~~~~~~~~< Install 'hassbian-config' Scripts"
 echo "Insralling Samba.."
 sudo hassbian-config install samba
 echo "Insralling Mosquitto.."
-echo "$mqtt_username $mqtt_password" | sudo hassbian-config install mosquitto
+sudo hassbian-config install mosquitto
+expect "Username: "
+send "$mqtt_username"
+expect "Password: "
+send "$mqtt_password"
 cat >> /home/homeassistant/.homeassistant/configuration.yaml <<EOF
 
 ## MQTT server (pull devices from SmartThing's 'MQTT Bridge' smartapp)
