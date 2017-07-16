@@ -11,7 +11,7 @@ My setup process to install and configuration of Hassbian to work with SmartThin
 
 ### :warning: note  
 **the auto install script is only tested on Raspberry Pi 3 with Hassbian after [clean install](https://home-assistant.io/docs/hassbian/installation/) and you already have home assistant up and running.** <br>
-**If you want to install on 'old' setup use the manual installation below.**
+**If you want to install on 'old' setup use the [manual installation](https://github.com/gilhaz/HomeAssistant_SmarthThings_Homebridge/blob/master/README.md#manual-installation-instructions) below.**
 
 ## Auto Install Script
 ### Download the script
