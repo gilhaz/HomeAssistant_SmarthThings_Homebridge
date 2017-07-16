@@ -1,0 +1,135 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: [REMOVED]
+  longitude: [REMOVED]
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 8
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: [REMOVED]
+  customize: !include customization.yaml
+
+# Show links to resources in log and frontend
+introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  # api_password: PASSWORD
+  # Uncomment this if you are using SSL or running in Docker etc
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+# Weather Prediction
+sensor:
+  platform: yr
+
+# Text to speech
+tts:
+  platform: google
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+## mosquitto mqtt server
+mqtt:
+  broker: localhost
+  port: 1883
+  client_id: home-assistant-1
+  username: [REMOVED]
+  password: [REMOVED]
+
+zone:
+  name: Home
+  latitude: [REMOVED]
+  longitude: [REMOVED]
+  radius: 250
+  icon: mdi:home
+
+light:
+  -
+    brightness_command_topic: "smartthings/Living Room Light/level"
+    brightness_scale: 100
+    brightness_state_topic: "smartthings/Living Room Light/level"
+    command_topic: "smartthings/Living Room Light/switch"
+    state_topic: "smartthings/Living Room Light/switch"
+    name: "Living Room Light"
+    payload_off: "off"
+    payload_on: "on"
+    platform: mqtt
+    retain: true
+  -
+    platform: lifx
+    server: hassbian.local
+
+switch:
+  -
+    platform: mqtt
+    name: "AC 25℃"
+    state_topic: "harmony-api/hubs/harmonylrhub/devices/tadiran-ac/command"
+    command_topic: "harmony-api/hubs/harmonylrhub/devices/tadiran-ac/command"
+    payload_on: "22c-low"
+    payload_off: "off"
+    optimistic: true
+    retain: true
+
+fan:
+  - platform: mqtt
+    name: "AC Control"
+    state_topic: "harmony-api/hubs/harmonylrhub/devices/tadiran-ac/command"
+    command_topic: "harmony-api/hubs/harmonylrhub/devices/tadiran-ac/command"
+    speed_state_topic: "harmony-api/hubs/harmonylrhub/devices/tadiran-ac/command"
+    speed_command_topic: "harmony-api/hubs/harmonylrhub/devices/tadiran-ac/command"
+    qos: 0
+    payload_on: "22c-low"
+    payload_off: "off"
+    payload_low_speed: "22c-low"
+    payload_medium_speed: "22c-auto"
+    payload_high_speed: "16c-auto"
+    speeds:
+      - low
+      - medium
+      - high
+
+cover:
+  - platform: mqtt
+    name: "window_shutter"
+    state_topic: "smartthings/Window Shutter/switch"
+    command_topic: "smartthings/Window Shutter/switch"
+    set_position_topic: "smartthings/Window Shutter/level"
+    payload_open: "on"
+    payload_close: "5"
+    state_open: "on"
+    state_closed: "5"
