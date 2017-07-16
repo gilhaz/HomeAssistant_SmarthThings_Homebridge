@@ -1,8 +1,38 @@
 # HomeAssistant_SmarthThings_Homebridge
-My setup process and configuration of Hassbian
+My setup process to install and configuration of Hassbian to work with SmartThings and HomeBridge
+
+#### Intgrate to HomeAssistant the following:
+- Mosquitto
+- Samba
+- SmartThings
+- HomeBridge
+- Harmony-api
 
 
-## Installation Instructions
+### :warning: note  
+**the auto install script is only tested on Raspberry Pi 3 with Hassbian after [clean install](https://home-assistant.io/docs/hassbian/installation/) and you already have home assistant up and running.** <br>
+**If you want to install on 'old' setup use the manual installation below.**
+
+## Auto Install Script
+### Download the script
+```sh
+wget  -O /var/tmp/install-script "https://raw.githubusercontent.com/gilhaz/HomeAssistant_SmarthThings_Homebridge/master/install-script"
+```
+### Make the file executable
+```sh
+chmod +x /var/tmp/install-script
+```
+### run the script
+```sh
+cd /var/tmp
+sudo ./install-script
+```
+### When prompt, insert UserName, Password and IP for the mqtt broker
+> And everything will be install, configure and update for you..
+> Enjoy!
+__________________________________
+
+## Manual Installation Instructions
 ### Set up your local and update
 ```sh
 sudo raspi-config
@@ -203,7 +233,7 @@ sudo mosquitto_sub -u user -P password -v -t '#'
 > exit both with [ctrl] [c]
 
 ### Install pm2
-### install mp2 to manage the autostart on boot for the 'smartthings-mqtt-bridge', 'homebridge' and 'harmony-api' servivces
+#### install mp2 to manage the autostart on boot for the 'smartthings-mqtt-bridge', 'homebridge' and 'harmony-api' servivces
 ```sh
 sudo npm install pm2 -g
 ```
