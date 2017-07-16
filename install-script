@@ -41,22 +41,20 @@ Enter Broker > "
 read -r mqtt_broker
 
 echo
-echo -n "~~~~~~~~~~~~~~~~~~~< Do You Want it all >~~~~~~~~~~~~~~~~~~~~~"
-echo "If you answer 'y', this will also install:"
-echo "Harmony API - for better responce time to Harmony devices and activities"
-echo "Samba - file sharing"
+echo  "~~~~~~~~~~~~~~~~~~~< Do You Want it all >~~~~~~~~~~~~~~~~~~~~~
+	If you answer 'y', this will also install:
+	* Harmony API - for better responce time to Harmony devices and activities
+	* Samba - file sharing"
 
-read -p "Install all? " -n 1 -r
+read -r install_all "Install all? > " -n 1 -r
 echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]
+if $install_all="y"
 then
   echo
   echo "Grate!"
-    install_all="yes"
   else
     echo
     echo "Harmony API and Samba will not be installed"
-    install_all="no"
 fi
 
 echo
@@ -71,17 +69,15 @@ sudo apt-get install -y libavahi-compat-libdnssd-dev
 
 echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Install 'hassbian-config' Scripts"
-if $install_all="yes"
+if $install_all="y"
 then
 echo "Insralling Samba.."
 sudo hassbian-config install samba
 fi
 echo "Insralling Mosquitto.."
-sudo hassbian-config install mosquitto
-expect "Username: "
-send "$mqtt_username"
-expect "Password: "
-send "$mqtt_password"
+echo $mqtt_username
+$mqtt_password
+ | sudo hassbian-config install mosquitto
 cat >> /home/homeassistant/.homeassistant/configuration.yaml <<EOF
 
 ## MQTT server (pull devices from SmartThing's 'MQTT Bridge' smartapp)
@@ -173,7 +169,7 @@ cat >> /home/pi/.homebridge/config.json <<EOF
 }
 EOF
 
-if $install_all="yes"
+if $install_all="y"
 then
 echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Install Harmony API"
