@@ -85,7 +85,7 @@ echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Install Avahi (HomeKit Support)"
 sudo apt-get install -y libavahi-compat-libdnssd-dev
 
-if $install_all="y"
+if [[ "$install_all" == "y" ]]
 then
 echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Insralling Samba.."
@@ -165,6 +165,8 @@ sudo npm install -g homebridge-homeassistant
 
 echo
 echo "Configureing 'smartthings-mqtt-bridge' in HomeBridge.."
+cd /home/pi/.homebridge
+touch config.json
 cat >> /home/pi/.homebridge/config.json <<EOF
 {
    "bridge":{
@@ -200,7 +202,7 @@ cat >> /home/pi/.homebridge/config.json <<EOF
 }
 EOF
 
-if $install_all="y"
+if [[ "$install_all" == "y" ]]
 then
 echo
 echo "~~~~~~~~~~~~~~~~~~~~~< Install Harmony API"
