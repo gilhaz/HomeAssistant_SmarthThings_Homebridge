@@ -261,7 +261,14 @@ sudo pm2 save
 sudo pm2 startup
 
 echo
-echo "Done."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ DONE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~ Mosquitto MQTT Info:                                     ~~"
+echo "~~ UserName: 	$mqtt_username 				  ~~"
+echo "~~ Password:	$mqtt_password	          		  ~~"
+echo "~~ Host:		mqtt://$mqtt_broker:1883	          ~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo
 echo "Rebooting.."
 sudo reboot
