@@ -101,15 +101,6 @@ echo
 echo "$mqtt_username $mqtt_password" | sudo hassbian-config install mosquitto
 
 echo
-echo "Initializing password file"
-echo
-sudo rm /etc/mosquitto/pwfile
-cd /etc/mosquitto
-touch pwfile
-chown mosquitto:mosquitto pwfile
-chmod 0600 pwfile
-
-echo
 echo "Creating password entry for user - $mqtt_username"
 echo
 mosquitto_passwd -b pwfile "$mqtt_username" "$mqtt_password"
@@ -150,12 +141,12 @@ cat >> /home/pi/config.yml <<EOF
 mqtt:
     # Specify your MQTT Broker's hostname or IP address here
     host: mqtt://$mqtt_broker
-    # Preface for the topics $PREFACE/$DEVICE_NAME/$PROPERTY
+    # Preface for the topics '$PREFACE'/'$DEVICE_NAME'/'$PROPERTY'
     preface: smartthings
 
-    # Suffix for the state topics $PREFACE/$DEVICE_NAME/$PROPERTY/$STATE_SUFFIX
+    # Suffix for the state topics '$PREFACE'/'$DEVICE_NAME'/'$PROPERTY'/'$STATE_SUFFIX'
     # state_suffix: state
-    # Suffix for the command topics $PREFACE/$DEVICE_NAME/$PROPERTY/$COMMAND_SUFFIX
+    # Suffix for the command topics '$PREFACE'/'$DEVICE_NAME'/'$PROPERTY'/'$COMMAND_SUFFIX'
     # command_suffix: cmd
 
     # Other optional settings from https://www.npmjs.com/package/mqtt#mqttclientstreambuilder-options
@@ -180,8 +171,7 @@ sudo npm install -g homebridge-homeassistant
 echo
 echo "Configureing 'smartthings-mqtt-bridge' in HomeBridge.."
 echo
-cd /home/pi/.homebridge
-touch config.json
+mkdir -p /home/pi/.homebridge
 cat >> /home/pi/.homebridge/config.json <<EOF
 {
    "bridge":{
