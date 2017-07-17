@@ -76,36 +76,46 @@ then
 fi
 
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Running apt-get preparation.."
+echo "Running apt-get preparation.."
+echo
 echo "(this my take a while)"
 sudo apt-get update
 sudo apt-get upgrade -y
 
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Install Avahi (HomeKit Support)"
+echo "Install Avahi (HomeKit Support)"
+echo
 sudo apt-get install -y libavahi-compat-libdnssd-dev
 
 if [[ "$install_all" == "y" ]]
 then
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Insralling Samba.."
+echo "Insralling Samba.."
+echo
 sudo hassbian-config install samba
 fi
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Insralling Mosquitto.."
+echo "Insralling Mosquitto.."
+echo
 echo "$mqtt_username $mqtt_password" | sudo hassbian-config install mosquitto
 
+echo
 echo "Initializing password file"
+echo
 sudo rm /etc/mosquitto/pwfile
 cd /etc/mosquitto
 touch pwfile
 chown mosquitto:mosquitto pwfile
 chmod 0600 pwfile
 
+echo
 echo "Creating password entry for user - $mqtt_username"
+echo
 mosquitto_passwd -b pwfile "$mqtt_username" "$mqtt_password"
 
+echo
 echo "Restarting Mosquitto service"
+echo
 systemctl restart mosquitto.service
 
 
@@ -121,17 +131,20 @@ mqtt:
 EOF
 
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Installig node.js 7.x and npm.."
+echo "Installig node.js 7.x and npm.."
+echo
 curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Installig SmartThings to MQTT bridge.."
+echo "Installig SmartThings to MQTT bridge.."
 echo "(Pull devices from SmartThing's 'MQTT Bridge' SmartApp)"
+echo
 sudo npm install -g smartthings-mqtt-bridge
 
 echo
 echo "Configuring smartthings-mqtt-bridge's config.yml.."
+echo
 cat >> /home/pi/config.yml <<EOF
 ---
 mqtt:
@@ -155,16 +168,19 @@ EOF
 
 
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Installing HomeBridge.."
+echo "Installing HomeBridge.."
 echo "(HomeKit suppoot)"
+echo
 sudo npm install -g --unsafe-perm homebridge
 
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Installing HomeBridge HomeAssistant support plugin.."
+echo "Installing HomeBridge HomeAssistant support plugin.."
+echo
 sudo npm install -g homebridge-homeassistant
 
 echo
 echo "Configureing 'smartthings-mqtt-bridge' in HomeBridge.."
+echo
 cd /home/pi/.homebridge
 touch config.json
 cat >> /home/pi/.homebridge/config.json <<EOF
