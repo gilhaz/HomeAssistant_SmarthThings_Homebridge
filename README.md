@@ -9,7 +9,7 @@ My setup process to install and configuration of Hassbian to work with SmartThin
 - Harmony-api
 
 ### :warning: note  
-** only tested on Raspberry Pi 3 with Hassbian after [clean install](https://home-assistant.io/docs/hassbian/installation/) and you already have home assistant up and running.** <br>
+**only tested on Raspberry Pi 3 with Hassbian after [clean install](https://home-assistant.io/docs/hassbian/installation/) and you already have home assistant up and running.**
 
 ## Installation Instructions
 ### Set up your local and update
