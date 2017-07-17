@@ -77,8 +77,8 @@ fi
 
 echo
 echo "Running apt-get preparation.."
-echo
 echo "(this my take a while)"
+echo
 sudo apt-get update
 sudo apt-get upgrade -y
 
@@ -94,6 +94,7 @@ echo "Insralling Samba.."
 echo
 sudo hassbian-config install samba
 fi
+
 echo
 echo "Insralling Mosquitto.."
 echo
@@ -117,7 +118,6 @@ echo
 echo "Restarting Mosquitto service"
 echo
 systemctl restart mosquitto.service
-
 
 cat >> /home/homeassistant/.homeassistant/configuration.yaml <<EOF
 
@@ -165,7 +165,6 @@ mqtt:
 # Port number to listen on
 port: 8080
 EOF
-
 
 echo
 echo "Installing HomeBridge.."
@@ -221,8 +220,9 @@ EOF
 if [[ "$install_all" == "y" ]]
 then
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Install Harmony API"
+echo "Install Harmony API"
 echo "Better server for speed up harmony devices responce"
+echo
 sudo npm install forever -g
 git clone https://github.com/maddox/harmony-api.git harmony_api
 cat >> /home/pi/harmony_api/config/config.json <<EOF
@@ -240,16 +240,19 @@ sudo harmony_api/script/bootstrap
 fi
 
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Install pm2"
+echo "Install pm2"
+echo
 sudo npm install pm2 -g
 
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Updete stuff for good practice"
+echo "Updete stuff for good practice"
+echo
 sudo apt-get update
 
 echo
-echo "~~~~~~~~~~~~~~~~~~~~~< Cofigure PM2 autostart on boot"
+echo "Cofigure PM2 autostart on boot"
 echo "for the services: smartthings-mqtt-bridge / homebridge / harmony-api"
+echo
 sudo pm2 start smartthings-mqtt-bridge
 sudo pm2 start homebridge
 sudo pm2 start harmony_api/app.js --name harmony-api
