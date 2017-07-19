@@ -225,11 +225,13 @@ sudo apt-get update
 ### Cofigure pm2 autostart
 ```sh
 sudo pm2 start smartthings-mqtt-bridge
-sudo pm2 start homebridge
 sudo pm2 start harmony_api/app.js --name harmony-api
 sudo pm2 ls # chack everything is green
+pm2 start homebridge
 sudo pm2 save
+pm2 save
 sudo pm2 startup
+pm2 startup
 ```
 
 ### Chack everything is working
