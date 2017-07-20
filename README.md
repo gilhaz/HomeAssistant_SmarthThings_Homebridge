@@ -79,7 +79,7 @@ sudo apt-get install -y nodejs
 ```
 
 ### install smartthings-mqtt-bridge (link smartthings devices to hass)
-Instroctions here: [Smarter-Smart-Things-with-MQTT-and-Home-Assistant](https://home-assistant.io/blog/2016/02/09/Smarter-Smart-Things-with-MQTT-and-Home-Assistant/)
+Instructions here: [Smarter-Smart-Things-with-MQTT-and-Home-Assistant](https://home-assistant.io/blog/2016/02/09/Smarter-Smart-Things-with-MQTT-and-Home-Assistant/)
 > only the 'SMARTTHINGS DEVICE' and 'SMARTTHINGS APP' parts.
 ### install smartthings to mqtt bridge (pull devices from SmartThing's 'MQTT Bridge' smartapp)
 ```sh
@@ -218,15 +218,15 @@ sudo mosquitto_sub -u user -P password -v -t '#'
 sudo npm install pm2 -g
 ```
 
-### Updete stuff for good practice
+### Update stuff for good practice
 ```sh
 sudo apt-get update
 ```
-### Cofigure pm2 autostart
+### Configure pm2 autostart
 ```sh
 sudo pm2 start smartthings-mqtt-bridge
 sudo pm2 start harmony_api/app.js --name harmony-api
-sudo pm2 ls # chack everything is green
+sudo pm2 ls # check everything is green
 pm2 start homebridge
 sudo pm2 save
 pm2 save
@@ -234,15 +234,15 @@ sudo pm2 startup
 pm2 startup
 ```
 
-### Chack everything is working
+### Check everything is working
 ```sh
 sudo reboot
 sudo mosquitto_sub -u user -P password -v -t '#'
 ```
-> start an actyvity thrue harmony app
-> serch for an update like: 'harmony-api/hubs/harmonylrhub/current_activity tv'
-> turn on a switch in smartthing app
-> serch for an update like: 'smartthings/Living Room Light/switch on'
+> start an activity thru Harmony app
+> search for an update like: 'harmony-api/hubs/harmonylrhub/current_activity tv'
+> turn on a switch in SmartThings app
+> search for an update like: 'smartthings/Living Room Light/switch on'
 
 
 ### Useful commands
