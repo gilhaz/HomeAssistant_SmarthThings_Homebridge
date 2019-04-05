@@ -212,6 +212,11 @@ sudo mosquitto_sub -u user -P password -v -t '#'
 > look for somthing like 'harmony-api/hubs/...'
 > exit both with [ctrl] [c]
 
+#### If you can't see the hub and activities try:
+> From your Harmony app, go to: Menu > Harmony Setup > Add/Edit Devices & Activities > Remote & Hub > Enable XMPP.
+* https://community.logitech.com/s/question/0D55A00008OsX3CSAV/update-to-accessing-harmony-hubs-local-api-via-xmpp
+
+
 ### Install pm2
 #### install mp2 to manage the autostart on boot for the 'smartthings-mqtt-bridge', 'homebridge' and 'harmony-api' servivces
 ```sh
@@ -243,10 +248,6 @@ sudo mosquitto_sub -u user -P password -v -t '#'
 > search for an update like: 'harmony-api/hubs/harmonylrhub/current_activity tv'
 > turn on a switch in SmartThings app
 > search for an update like: 'smartthings/Living Room Light/switch on'
-
-#### If you can't see the hub and activities try:
-> From your Harmony app, go to: Menu > Harmony Setup > Add/Edit Devices & Activities > Remote & Hub > Enable XMPP
-* https://community.logitech.com/s/question/0D55A00008OsX3CSAV/update-to-accessing-harmony-hubs-local-api-via-xmpp
 
 
 ### Useful commands
