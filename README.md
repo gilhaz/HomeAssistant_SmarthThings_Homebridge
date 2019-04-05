@@ -244,6 +244,10 @@ sudo mosquitto_sub -u user -P password -v -t '#'
 > turn on a switch in SmartThings app
 > search for an update like: 'smartthings/Living Room Light/switch on'
 
+#### If you can't see the hub and activities try:
+> From your Harmony app, go to: Menu > Harmony Setup > Add/Edit Devices & Activities > Remote & Hub > Enable XMPP
+> https://community.logitech.com/s/question/0D55A00008OsX3CSAV/update-to-accessing-harmony-hubs-local-api-via-xmpp
+
 
 ### Useful commands
 ```sh
